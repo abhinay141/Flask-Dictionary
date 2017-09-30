@@ -1,0 +1,50 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Enter a word</h1><br>
+    <form  action="/send">
+
+    <p>your word:<input type="text" name = "word"</p>
+
+
+
+        <input class="btn btn-primary" type="submit" value="submit" onclick="something()"></br>
+        <h1 id="result"></h1>
+
+
+    </form>
+
+
+</body>
+
+<script>
+$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+function something()
+{
+    var word = $("#word").txt();
+
+    console.log(word);
+    //lets test this
+    // run the render script
+    var d = {"word":word}
+  $.getJSON($SCRIPT_ROOT + '/send', {
+       word: $('input[name="word"]').txt()
+     }, function(data) {
+         console.log(data.result);
+       $("#result").text(data.result);
+     }
+
+ );
+
+}
+</script>
+
+
+</html>
